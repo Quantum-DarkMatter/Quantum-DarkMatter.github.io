@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CERTPATH · 国际 IT 认证备考站</title>
+  <meta name="description" content="备考经验、考题分析、学习路线图。覆盖 AWS、Cisco、CompTIA、Microsoft 等主流认证体系，帮你少走弯路。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:    #0a0c10;
+      --bg2:   #0f1117;
+      --bg3:   rgba(16,22,36,0.75);
+      --bg4:   rgba(28,35,51,0.85);
+      --border:  rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.13);
+      --text:  #e8eaf0;
+      --text2: #8892a4;
+      --text3: #4a5568;
+      --blue:  #4d9fff;
+      --blue2: #1a3a5c;
+      --blue3: #0d2040;
+      --gold:  #f5c842;
+      --gold2: #3a2e00;
+      --cyan:  #00d4aa;
+      --cyan2: #003d30;
+      --mono:    'Space Mono', monospace;
+      --display: 'Syne', sans-serif;
+      --body:    'Noto Sans SC', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: #03040a;
+      color: var(--text);
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    #cosmos {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 2rem 4rem; position: relative; z-index: 1; }
+
+    .header {
+      padding: 2rem 0 1.8rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .logo-row { display: flex; align-items: center; gap: 14px; }
+    .logo-box {
+      width: 38px; height: 38px; border: 1px solid var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; flex-shrink: 0;
+    }
+    .logo-box::before {
+      content: ''; position: absolute;
+      top: -4px; left: -4px; right: -4px; bottom: -4px;
+      border: 1px solid var(--border);
+    }
+    .logo-box span { font-family: var(--mono); font-size: 13px; color: var(--blue); font-weight: 700; }
+    .brand-name { font-family: var(--display); font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: .04em; }
+    .brand-sub { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .12em; margin-top: 2px; }
+    nav { display: flex; gap: 1.8rem; }
+    nav a { font-family: var(--mono); font-size: 11px; color: var(--text2); letter-spacing: .08em; transition: color .15s; }
+    nav a:hover, nav a.on { color: var(--blue); }
+
+    .hero { padding: 3rem 0 2.5rem; border-bottom: 1px solid var(--border); }
+    .hero-label { display: flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; }
+    .hero-label-line { width: 24px; height: 1px; background: var(--blue); flex-shrink: 0; }
+    .hero-label-text { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .15em; }
+    .hero-title { font-family: var(--display); font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; letter-spacing: -.01em; }
+    .hero-title em { font-style: normal; color: var(--blue); }
+    .hero-desc { font-size: 13px; color: var(--text2); line-height: 1.9; max-width: 460px; margin-bottom: 2rem; font-weight: 300; }
+    .hero-certs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+    .cert-pill { font-family: var(--mono); font-size: 10px; padding: 4px 10px; border: 1px solid var(--border2); color: var(--text2); letter-spacing: .06em; }
+    .cert-pill.hot { border-color: var(--blue); color: var(--blue); background: var(--blue3); }
+    .hero-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .stats { display: flex; gap: 2.5rem; }
+    .stat-n { font-family: var(--display); font-size: 28px; font-weight: 700; color: var(--text); }
+    .stat-n span { font-size: 15px; color: var(--blue); }
+    .stat-l { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .08em; margin-top: 3px; }
+    .rss-btn { font-family: var(--mono); font-size: 10px; color: var(--gold); border: 1px solid var(--gold); padding: 7px 16px; letter-spacing: .08em; cursor: pointer; background: var(--gold2); transition: background .15s; }
+    .rss-btn:hover { background: #4a3a00; }
+
+    .sec { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+    .sec-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+    .sec-title { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .12em; }
+    .sec-title span { color: var(--blue); margin-right: 6px; }
+    .see-all { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .06em; }
+    .see-all:hover { text-decoration: underline; }
+
+    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .cat-card { background: var(--bg3); border: 1px solid var(--border); padding: 1.2rem 1rem; cursor: pointer; transition: border-color .15s, background .15s; display: block; }
+    .cat-card:hover { border-color: var(--blue); background: var(--bg4); }
+    .cat-icon-box { width: 32px; height: 32px; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; margin-bottom: .8rem; }
+    .cat-icon-box svg { width: 16px; height: 16px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
+    .cat-name { font-family: var(--display); font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 3px; letter-spacing: .02em; }
+    .cat-count { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+
+    .feat-card { background: var(--bg3); border: 1px solid var(--border2); padding: 1.5rem; cursor: pointer; transition: border-color .15s; display: block; position: relative; overflow: hidden; }
+    .feat-card::before { content: 'FEATURED'; position: absolute; top: 1.2rem; right: 1.2rem; font-family: var(--mono); font-size: 9px; color: var(--gold); border: 1px solid var(--gold); padding: 2px 7px; letter-spacing: .1em; background: var(--gold2); }
+    .feat-card:hover { border-color: var(--blue); }
+    .feat-title { font-family: var(--display); font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: .7rem; padding-right: 7rem; }
+    .feat-desc { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 1.1rem; font-weight: 300; }
+    .feat-foot { display: flex; justify-content: space-between; align-items: center; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-family: var(--mono); font-size: 9px; padding: 3px 7px; border: 1px solid var(--border2); color: var(--text3); letter-spacing: .06em; }
+    .tag.blue { border-color: var(--blue); color: var(--blue); background: var(--blue3); }
+    .tag.cert { border-color: var(--cyan); color: var(--cyan); background: var(--cyan2); }
+    .tag.purple { border-color: #7f77dd; color: #7f77dd; background: #1a1730; }
+    .read-more { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .06em; white-space: nowrap; }
+
+    .posts-list { display: flex; flex-direction: column; }
+    .post-row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; padding: 1.2rem 0; border-bottom: 1px solid var(--border); }
+    .post-row:last-child { border-bottom: none; }
+    .post-row:hover .post-title { color: var(--blue); }
+    .post-meta { display: flex; align-items: center; gap: 8px; margin-bottom: .5rem; }
+    .post-tag { font-family: var(--mono); font-size: 9px; padding: 2px 7px; border: 1px solid var(--border2); color: var(--text3); letter-spacing: .06em; }
+    .post-tag.cert { border-color: var(--cyan); color: var(--cyan); background: var(--cyan2); }
+    .post-tag.tool { border-color: #7f77dd; color: #7f77dd; background: #1a1730; }
+    .post-tag.tip  { border-color: var(--gold); color: var(--gold); background: var(--gold2); }
+    .post-date { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+    .post-title { font-size: 14px; font-weight: 400; color: var(--text); line-height: 1.5; margin-bottom: .35rem; transition: color .15s; }
+    .post-exc { font-size: 11px; color: var(--text3); line-height: 1.7; font-weight: 300; }
+    .post-min { font-family: var(--mono); font-size: 10px; color: var(--text3); white-space: nowrap; margin-top: 4px; }
+
+    .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .tool-card { background: var(--bg3); border: 1px solid var(--border); padding: 1rem; display: flex; gap: 12px; align-items: flex-start; cursor: pointer; transition: border-color .15s; }
+    .tool-card:hover { border-color: var(--cyan); }
+    .tool-num { font-family: var(--mono); font-size: 11px; color: var(--text3); min-width: 20px; padding-top: 2px; }
+    .tool-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .tool-desc { font-size: 11px; color: var(--text3); line-height: 1.6; font-weight: 300; }
+    .tool-link { font-family: var(--mono); font-size: 9px; color: var(--cyan); margin-top: 4px; display: block; letter-spacing: .06em; }
+
+    .footer { padding: 1.8rem 0 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem; }
+    .footer-l { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .04em; }
+    .footer-r { display: flex; gap: 1.2rem; }
+    .footer-a { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .06em; }
+    .footer-a:hover { color: var(--blue); }
+
+    @media (max-width: 600px) {
+      .header { flex-direction: column; align-items: flex-start; }
+      .hero-title { font-size: 26px; }
+      .cat-grid { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .feat-title { padding-right: 0; }
+      .feat-card::before { position: static; display: inline-block; margin-bottom: .75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<div class="wrap">
+
+  <header class="header">
+    <div class="logo-row">
+      <div class="logo-box"><span>IT</span></div>
+      <div>
+        <div class="brand-name">CERTPATH</div>
+        <div class="brand-sub">INTERNATIONAL · CERTIFICATION</div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html" class="on">HOME</a>
+      <a href="#">CERTS</a>
+      <a href="#">TOOLS</a>
+      <a href="#">ABOUT</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-label">
+      <div class="hero-label-line"></div>
+      <div class="hero-label-text">GLOBAL IT CERTIFICATION HUB</div>
+    </div>
+    <h1 class="hero-title">通往国际认证<br>的 <em>最短路径</em></h1>
+    <p class="hero-desc">备考经验、考题分析、学习路线图。覆盖 AWS、Cisco、CompTIA、Microsoft 等主流认证体系，帮你少走弯路。</p>
+    <div class="hero-certs">
+      <div class="cert-pill hot">AWS SAA</div>
+      <div class="cert-pill hot">CCNA</div>
+      <div class="cert-pill hot">Security+</div>
+      <div class="cert-pill">AZ-900</div>
+      <div class="cert-pill">PMP</div>
+      <div class="cert-pill">CISSP</div>
+      <div class="cert-pill">CCIE</div>
+      <div class="cert-pill">CKA</div>
+    </div>
+    <div class="hero-bottom">
+      <div class="stats">
+        <div><div class="stat-n">58<span>+</span></div><div class="stat-l">ARTICLES</div></div>
+        <div><div class="stat-n">12</div><div class="stat-l">CERTS COVERED</div></div>
+        <div><div class="stat-n">6</div><div class="stat-l">FREE TOOLS</div></div>
+      </div>
+      <a href="#" class="rss-btn">⬡ RSS FEED</a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-hd"><span class="sec-title"><span>//</span>CATEGORIES</span></div>
+    <div class="cat-grid">
+      <a href="#" class="cat-card">
+        <div class="cat-icon-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="cat-name">小软件 &amp; 工具</div>
+        <div class="cat-count">18 ARTICLES</div>
+      </a>
+      <a href="#" class="cat-card">
+        <div class="cat-icon-box"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="cat-name">国际 IT 认证考试</div>
+        <div class="cat-count">24 ARTICLES</div>
+      </a>
+      <a href="#" class="cat-card">
+        <div class="cat-icon-box"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="cat-name">经验 &amp; 技巧</div>
+        <div class="cat-count">16 ARTICLES</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-hd"><span class="sec-title"><span>//</span>FEATURED</span></div>
+    <a href="#" class="feat-card">
+      <div class="feat-title">AWS SAA-C03 备考全攻略：从零到拿证只需 60 天</div>
+      <p class="feat-desc">系统梳理 AWS 解决方案架构师认证的考试范围、高频服务、出题规律，附带个人备考日历和推荐资料清单，适合零基础入门。</p>
+      <div class="feat-foot">
+        <div class="tags">
+          <span class="tag blue">AWS</span>
+          <span class="tag blue">SAA-C03</span>
+          <span class="tag">Cloud</span>
+          <span class="tag">Beginner</span>
+        </div>
+        <div class="read-more">READ FULL →</div>
+      </div>
+    </a>
+  </section>
+
+  <section class="sec">
+    <div class="sec-hd">
+      <span class="sec-title"><span>//</span>LATEST POSTS</span>
+      <a href="#" class="see-all">ALL POSTS →</a>
+    </div>
+    <div class="posts-list">
+      <a href="#" class="post-row">
+        <div>
+          <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2024-12-20</span></div>
+          <div class="post-title">CCNA 考试改版了什么？2024 版考纲变化详解</div>
+          <div class="post-exc">200-301 最新版本对比旧版新增了哪些考点，哪些内容权重提升，备考策略应该如何调整。</div>
+        </div>
+        <div class="post-min">7 MIN</div>
+      </a>
+      <a href="#" class="post-row">
+        <div>
+          <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2024-12-14</span></div>
+          <div class="post-title">CompTIA Security+ SY0-701 高频考点归纳</div>
+          <div class="post-exc">整理了模拟题中出现频率最高的 30 个知识点，按域分类，附记忆口诀和常见错误选项分析。</div>
+        </div>
+        <div class="post-min">9 MIN</div>
+      </a>
+      <a href="#" class="post-row">
+        <div>
+          <div class="post-meta"><span class="post-tag tool">TOOL</span><span class="post-date">2024-12-05</span></div>
+          <div class="post-title">macOS 上 5 个被低估的效率神器</div>
+          <div class="post-exc">不是又一篇 Alfred/Raycast 推荐，这次挑的是装机率极低但解决真实痛点的小工具。</div>
+        </div>
+        <div class="post-min">5 MIN</div>
+      </a>
+      <a href="#" class="post-row">
+        <div>
+          <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2024-11-28</span></div>
+          <div class="post-title">Microsoft AZ-104 与 AZ-900 的区别和选择建议</div>
+          <div class="post-exc">两个认证的定位、难度、含金量对比，以及不同背景的人应该从哪个开始入手的决策框架。</div>
+        </div>
+        <div class="post-min">6 MIN</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-hd">
+      <span class="sec-title"><span>//</span>FREE TOOLS</span>
+      <a href="#" class="see-all">ALL →</a>
+    </div>
+    <div class="tools-grid">
+      <a href="#" class="tool-card">
+        <div class="tool-num">01</div>
+        <div><div class="tool-name">认证路线规划器</div><div class="tool-desc">输入当前技能方向，输出推荐认证路径</div><span class="tool-link">LAUNCH TOOL →</span></div>
+      </a>
+      <a href="#" class="tool-card">
+        <div class="tool-num">02</div>
+        <div><div class="tool-name">考试难度对比</div><div class="tool-desc">横向对比主流认证的难度、费用、有效期</div><span class="tool-link">LAUNCH TOOL →</span></div>
+      </a>
+      <a href="#" class="tool-card">
+        <div class="tool-num">03</div>
+        <div><div class="tool-name">Anki 卡片生成器</div><div class="tool-desc">粘贴考点文本，一键生成复习卡片包</div><span class="tool-link">LAUNCH TOOL →</span></div>
+      </a>
+      <a href="#" class="tool-card">
+        <div class="tool-num">04</div>
+        <div><div class="tool-name">备考倒计时</div><div class="tool-desc">设置考试日期，生成每日学习任务</div><span class="tool-link">LAUNCH TOOL →</span></div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-l">© 2024 CERTPATH · POWERED BY GITHUB PAGES</div>
+    <div class="footer-r">
+      <a href="#" class="footer-a">GITHUB</a>
+      <a href="#" class="footer-a">RSS</a>
+      <a href="#" class="footer-a">EMAIL</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('cosmos');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [], shoots = [], frame = 0;
+  let galaxyDrawn = false;
+
+  function rnd(a, b){ return Math.random()*(b-a)+a; }
+
+  // 北斗七星真实比例坐标 (天枢/天璇/天玑/天权/玉衡/开阳/摇光)
+  const BD = [
+    {rx:0.00, ry:0.38, r:2.6},
+    {rx:0.13, ry:0.00, r:2.5},
+    {rx:0.36, ry:0.08, r:2.4},
+    {rx:0.44, ry:0.38, r:2.4},
+    {rx:0.70, ry:0.52, r:2.8},
+    {rx:0.88, ry:0.34, r:2.5},
+    {rx:1.00, ry:0.46, r:2.3},
+  ];
+
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    galaxyDrawn = false;
+    initStars();
+  }
+
+  function initStars(){
+    stars = [];
+    for(let i=0;i<300;i++) stars.push({x:rnd(0,W),y:rnd(0,H),r:rnd(.15,.55),al:rnd(.14,.50),tw:rnd(.003,.011),ph:rnd(0,Math.PI*2),spd:.03,col:`hsl(${rnd(200,240)},55%,88%)`});
+    for(let i=0;i<160;i++) stars.push({x:rnd(0,W),y:rnd(0,H),r:rnd(.48,1.1),al:rnd(.28,.68),tw:rnd(.005,.018),ph:rnd(0,Math.PI*2),spd:.07,col:`hsl(${rnd(185,255)},65%,92%)`});
+    for(let i=0;i< 50;i++) stars.push({x:rnd(0,W),y:rnd(0,H),r:rnd(.9,1.9), al:rnd(.55,.92),tw:rnd(.008,.025),ph:rnd(0,Math.PI*2),spd:.13,col:`hsl(${rnd(190,230)},80%,100%)`});
+  }
+
+  /* ── 螺旋星系：完全静止，只绘制一次到离屏 canvas ── */
+  let galaxyCanvas = null;
+  function buildGalaxyCache(){
+    const size = Math.round(W * 0.30);
+    galaxyCanvas = document.createElement('canvas');
+    galaxyCanvas.width  = size * 2;
+    galaxyCanvas.height = size * 2;
+    const gc = galaxyCanvas.getContext('2d');
+    const cx = size, cy = size;
+    const outerR = size * 0.82;
+    const tilt   = 0.28;
+    const rot    = -0.42;
+    const hue    = 42;
+    const ba     = 0.84;
+
+    gc.save();
+    gc.translate(cx, cy);
+    gc.rotate(rot);
+    gc.scale(1, tilt);
+
+    // 核球
+    const core = gc.createRadialGradient(0,0,0,0,0,outerR*0.19);
+    core.addColorStop(0,   `hsla(${hue+30},92%,99%,${ba*0.96})`);
+    core.addColorStop(0.15,`hsla(${hue+15},80%,88%,${ba*0.72})`);
+    core.addColorStop(0.55,`hsla(${hue},68%,62%,${ba*0.28})`);
+    core.addColorStop(1,   'transparent');
+    gc.fillStyle = core;
+    gc.beginPath(); gc.arc(0,0,outerR*0.19,0,Math.PI*2); gc.fill();
+
+    // 盘面
+    const disc = gc.createRadialGradient(0,0,0,0,0,outerR);
+    disc.addColorStop(0,   `hsla(${hue},62%,68%,${ba*0.20})`);
+    disc.addColorStop(0.38,`hsla(${hue},58%,52%,${ba*0.10})`);
+    disc.addColorStop(0.72,`hsla(${hue-12},48%,38%,${ba*0.05})`);
+    disc.addColorStop(1,   'transparent');
+    gc.fillStyle = disc;
+    gc.beginPath(); gc.arc(0,0,outerR,0,Math.PI*2); gc.fill();
+
+    // 尘埃带
+    const dw = outerR*2.1, dh = outerR*0.055;
+    const dust = gc.createLinearGradient(0,-dh,0,dh);
+    dust.addColorStop(0,   'transparent');
+    dust.addColorStop(0.38,`rgba(2,3,8,${ba*0.52})`);
+    dust.addColorStop(0.62,`rgba(2,3,8,${ba*0.52})`);
+    dust.addColorStop(1,   'transparent');
+    gc.fillStyle = dust;
+    gc.fillRect(-dw/2,-dh,dw,dh*2);
+
+    // 旋臂星点（固定随机种子效果——用固定序列替代 Math.random）
+    // 用简单 LCG 伪随机保证每次重建结果一致
+    let seed = 20240101;
+    function sr(){ seed=(seed*1664525+1013904223)&0xffffffff; return (seed>>>0)/0xffffffff; }
+    function srnd(a,b){ return a+(b-a)*sr(); }
+
+    for(let arm=0;arm<2;arm++){
+      const aBase=(arm/2)*Math.PI*2;
+      for(let i=0;i<340;i++){
+        const tt=i/340;
+        const ang=aBase+tt*Math.PI*3.3;
+        const r=outerR*0.09+outerR*0.87*tt;
+        const sc=srnd(-1,1)*outerR*0.052*(0.28+tt*0.72);
+        const px=Math.cos(ang)*r+Math.sin(ang)*sc;
+        const py=Math.sin(ang)*r-Math.cos(ang)*sc*0.38;
+        const br=(1-tt)*0.68+srnd(0,0.32);
+        const sz=srnd(0.28,0.85)*(1-tt*0.48);
+        gc.globalAlpha=ba*br*srnd(0.38,0.98);
+        const sh=hue+(1-tt)*26+srnd(-14,14);
+        gc.fillStyle=`hsl(${sh},${48+tt*28}%,${74+br*20}%)`;
+        gc.beginPath(); gc.arc(px,py,sz,0,Math.PI*2); gc.fill();
+      }
+    }
+
+    // 外晕
+    const halo=gc.createRadialGradient(0,0,outerR*0.55,0,0,outerR*1.45);
+    halo.addColorStop(0,`hsla(${hue},52%,48%,${ba*0.045})`);
+    halo.addColorStop(1,'transparent');
+    gc.globalAlpha=1;
+    gc.fillStyle=halo;
+    gc.beginPath(); gc.arc(0,0,outerR*1.45,0,Math.PI*2); gc.fill();
+
+    gc.restore();
+  }
+
+  function drawGalaxy(){
+    if(!galaxyCanvas) buildGalaxyCache();
+    const s = galaxyCanvas.width;
+    const gx = W*0.82 - s/2;
+    const gy = H*0.17 - s/2;
+    ctx.drawImage(galaxyCanvas, gx, gy);
+  }
+
+  /* ── 北斗七星 ── */
+  function drawBigDipper(){
+    const ax=W*0.05, ay=H*0.08, sx=W*0.32, sy=H*0.28;
+    const pts=BD.map(s=>({x:ax+s.rx*sx, y:ay+s.ry*sy, r:s.r}));
+    const lines=[[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]];
+
+    ctx.save();
+    lines.forEach(([a,b])=>{
+      const lg=ctx.createLinearGradient(pts[a].x,pts[a].y,pts[b].x,pts[b].y);
+      lg.addColorStop(0,'rgba(160,200,255,0.28)');
+      lg.addColorStop(.5,'rgba(140,185,255,0.18)');
+      lg.addColorStop(1,'rgba(160,200,255,0.28)');
+      ctx.strokeStyle=lg; ctx.lineWidth=0.7;
+      ctx.setLineDash([3,4]);
+      ctx.beginPath(); ctx.moveTo(pts[a].x,pts[a].y); ctx.lineTo(pts[b].x,pts[b].y); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+
+    pts.forEach((p,i)=>{
+      const phase=frame*0.0014+i*1.37;
+      const tw=0.72+0.28*Math.sin(phase);
+      const glowR=p.r*(4.5+1.5*Math.sin(phase*1.3));
+
+      // 光晕
+      const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,glowR*2.5);
+      glow.addColorStop(0,`rgba(180,215,255,${0.22*tw})`);
+      glow.addColorStop(.4,`rgba(160,200,255,${0.10*tw})`);
+      glow.addColorStop(1,'transparent');
+      ctx.fillStyle=glow;
+      ctx.beginPath(); ctx.arc(p.x,p.y,glowR*2.5,0,Math.PI*2); ctx.fill();
+
+      // 四芒星芒
+      const spike=p.r*5*tw;
+      [0,Math.PI/2].forEach(ang=>{
+        const g2=ctx.createLinearGradient(
+          p.x+Math.cos(ang)*spike, p.y+Math.sin(ang)*spike,
+          p.x-Math.cos(ang)*spike, p.y-Math.sin(ang)*spike
+        );
+        g2.addColorStop(0,'transparent');
+        g2.addColorStop(.5,`rgba(210,230,255,${0.7*tw})`);
+        g2.addColorStop(1,'transparent');
+        ctx.strokeStyle=g2; ctx.lineWidth=0.7; ctx.globalAlpha=0.35*tw;
+        ctx.beginPath();
+        ctx.moveTo(p.x+Math.cos(ang)*spike, p.y+Math.sin(ang)*spike);
+        ctx.lineTo(p.x-Math.cos(ang)*spike, p.y-Math.sin(ang)*spike);
+        ctx.stroke();
+      });
+      ctx.globalAlpha=1;
+
+      // 星核
+      const core=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*tw);
+      core.addColorStop(0,'rgba(240,248,255,1)');
+      core.addColorStop(.4,`rgba(190,220,255,${0.85*tw})`);
+      core.addColorStop(1,'transparent');
+      ctx.fillStyle=core;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*1.1*tw,0,Math.PI*2); ctx.fill();
+    });
+    ctx.restore();
+  }
+
+  function drawStars(){
+    stars.forEach(s=>{
+      s.ph+=s.tw;
+      const a=s.al*(.68+.32*Math.sin(s.ph));
+      if(s.spd>.1){
+        const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*4.5);
+        g.addColorStop(0,s.col.replace('hsl(','hsla(').replace(')',`,${a*.5})`));
+        g.addColorStop(1,'transparent');
+        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(s.x,s.y,s.r*4.5,0,Math.PI*2); ctx.fill();
+      }
+      ctx.globalAlpha=a; ctx.fillStyle=s.col;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+      ctx.globalAlpha=1;
+      s.y+=s.spd*.055; if(s.y>H+2) s.y=-2;
+    });
+  }
+
+  function spawnShoot(){
+    if(shoots.length<2 && Math.random()<.004){
+      shoots.push({x:rnd(W*.05,W*.95),y:rnd(H*.05,H*.42),vx:rnd(5,12),vy:rnd(2,5),len:rnd(75,165),life:1});
+    }
+  }
+  function drawShoots(){
+    shoots=shoots.filter(s=>s.life>.02);
+    shoots.forEach(s=>{
+      s.life-=.022;
+      const tg=ctx.createLinearGradient(s.x,s.y,s.x-s.vx*(s.len/13),s.y-s.vy*(s.len/13));
+      tg.addColorStop(0,`rgba(185,220,255,${s.life*.88})`);
+      tg.addColorStop(1,'transparent');
+      ctx.strokeStyle=tg; ctx.lineWidth=1.3;
+      ctx.beginPath(); ctx.moveTo(s.x,s.y);
+      ctx.lineTo(s.x-s.vx*(s.len/13),s.y-s.vy*(s.len/13)); ctx.stroke();
+      s.x+=s.vx; s.y+=s.vy;
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#03040a'; ctx.fillRect(0,0,W,H);
+
+    drawGalaxy();       // 静止星系（离屏缓存，直接贴图）
+    drawBigDipper();    // 北斗七星（闪烁）
+    drawStars();        // 背景星场
+    spawnShoot();
+    drawShoots();       // 流星
+
+    // 暗角
+    const vg=ctx.createRadialGradient(W/2,H*.28,0,W/2,H*.52,H*.88);
+    vg.addColorStop(0,'rgba(3,4,10,0)');
+    vg.addColorStop(1,'rgba(3,4,10,.5)');
+    ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
+
+    frame++;
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', ()=>{ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; galaxyCanvas=null; initStars(); });
+  resize();
+  draw();
+})();
+</script>
+</body>
+</html>
