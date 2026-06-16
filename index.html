@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CERTPATH · 国际 IT 认证备考站</title>
-  <meta name="description" content="备考经验、考题分析、学习路线图。覆盖 AWS、Cisco、CompTIA、Microsoft 等主流认证体系，帮你少走弯路。" />
+  <title>CERTPATH · 國際 IT 認證備考站 | AWS、Cisco、CompTIA 圖文教程</title>
+  <meta name="description" content="專注國際 IT 認證的圖文備考教程，涵蓋 AWS SAA、CCNA、CompTIA Security+、AZ-900 等主流認證。備考經驗、考點解析、學習路線，幫你高效拿證。" />
+  <meta name="keywords" content="IT認證,AWS SAA,CCNA,CompTIA,Security+,AZ-900,備考教程,認證考試" />
+  <link rel="canonical" href="https://quantum-darkmatter.github.io/" />
+
+  <!-- Open Graph / 社交分享 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://quantum-darkmatter.github.io/" />
+  <meta property="og:title" content="CERTPATH · 國際 IT 認證備考站" />
+  <meta property="og:description" content="專注國際 IT 認證的圖文備考教程，涵蓋 AWS SAA、CCNA、CompTIA Security+、AZ-900 等主流認證。" />
+
+  <!-- 結構化資料：幫助 Google / AI 理解站點性質 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "CERTPATH",
+    "description": "專注國際 IT 認證的圖文備考教程，涵蓋 AWS、Cisco、CompTIA、Microsoft 等主流認證體系。",
+    "url": "https://quantum-darkmatter.github.io/",
+    "inLanguage": "zh-TW",
+    "author": {
+      "@type": "Person",
+      "name": "CERTPATH"
+    },
+    "about": [
+      { "@type": "Thing", "name": "AWS 認證" },
+      { "@type": "Thing", "name": "Cisco CCNA" },
+      { "@type": "Thing", "name": "CompTIA Security+" },
+      { "@type": "Thing", "name": "Microsoft Azure 認證" }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -23,10 +54,10 @@
       --blue:  #4d9fff;
       --blue2: #1a3a5c;
       --blue3: #0d2040;
-      --gold:  #f5c842;
-      --gold2: #3a2e00;
       --cyan:  #00d4aa;
       --cyan2: #003d30;
+      --gold:  #f5c842;
+      --gold2: #3a2e00;
       --mono:    'Space Mono', monospace;
       --display: 'Syne', sans-serif;
       --body:    'Noto Sans SC', sans-serif;
@@ -83,17 +114,10 @@
     .hero-label-text { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .15em; }
     .hero-title { font-family: var(--display); font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; letter-spacing: -.01em; }
     .hero-title em { font-style: normal; color: var(--blue); }
-    .hero-desc { font-size: 13px; color: var(--text2); line-height: 1.9; max-width: 460px; margin-bottom: 2rem; font-weight: 300; }
-    .hero-certs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+    .hero-desc { font-size: 13px; color: var(--text2); line-height: 1.9; max-width: 520px; font-weight: 300; }
+    .hero-certs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.5rem; }
     .cert-pill { font-family: var(--mono); font-size: 10px; padding: 4px 10px; border: 1px solid var(--border2); color: var(--text2); letter-spacing: .06em; }
     .cert-pill.hot { border-color: var(--blue); color: var(--blue); background: var(--blue3); }
-    .hero-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-    .stats { display: flex; gap: 2.5rem; }
-    .stat-n { font-family: var(--display); font-size: 28px; font-weight: 700; color: var(--text); }
-    .stat-n span { font-size: 15px; color: var(--blue); }
-    .stat-l { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .08em; margin-top: 3px; }
-    .rss-btn { font-family: var(--mono); font-size: 10px; color: var(--gold); border: 1px solid var(--gold); padding: 7px 16px; letter-spacing: .08em; cursor: pointer; background: var(--gold2); transition: background .15s; }
-    .rss-btn:hover { background: #4a3a00; }
 
     .sec { padding: 2rem 0; border-bottom: 1px solid var(--border); }
     .sec-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
@@ -101,27 +125,6 @@
     .sec-title span { color: var(--blue); margin-right: 6px; }
     .see-all { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .06em; }
     .see-all:hover { text-decoration: underline; }
-
-    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .cat-card { background: var(--bg3); border: 1px solid var(--border); padding: 1.2rem 1rem; cursor: pointer; transition: border-color .15s, background .15s; display: block; }
-    .cat-card:hover { border-color: var(--blue); background: var(--bg4); }
-    .cat-icon-box { width: 32px; height: 32px; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; margin-bottom: .8rem; }
-    .cat-icon-box svg { width: 16px; height: 16px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
-    .cat-name { font-family: var(--display); font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 3px; letter-spacing: .02em; }
-    .cat-count { font-family: var(--mono); font-size: 10px; color: var(--text3); }
-
-    .feat-card { background: var(--bg3); border: 1px solid var(--border2); padding: 1.5rem; cursor: pointer; transition: border-color .15s; display: block; position: relative; overflow: hidden; }
-    .feat-card::before { content: 'FEATURED'; position: absolute; top: 1.2rem; right: 1.2rem; font-family: var(--mono); font-size: 9px; color: var(--gold); border: 1px solid var(--gold); padding: 2px 7px; letter-spacing: .1em; background: var(--gold2); }
-    .feat-card:hover { border-color: var(--blue); }
-    .feat-title { font-family: var(--display); font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: .7rem; padding-right: 7rem; }
-    .feat-desc { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 1.1rem; font-weight: 300; }
-    .feat-foot { display: flex; justify-content: space-between; align-items: center; }
-    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
-    .tag { font-family: var(--mono); font-size: 9px; padding: 3px 7px; border: 1px solid var(--border2); color: var(--text3); letter-spacing: .06em; }
-    .tag.blue { border-color: var(--blue); color: var(--blue); background: var(--blue3); }
-    .tag.cert { border-color: var(--cyan); color: var(--cyan); background: var(--cyan2); }
-    .tag.purple { border-color: #7f77dd; color: #7f77dd; background: #1a1730; }
-    .read-more { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .06em; white-space: nowrap; }
 
     .posts-list { display: flex; flex-direction: column; }
     .post-row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; padding: 1.2rem 0; border-bottom: 1px solid var(--border); }
@@ -137,14 +140,6 @@
     .post-exc { font-size: 11px; color: var(--text3); line-height: 1.7; font-weight: 300; }
     .post-min { font-family: var(--mono); font-size: 10px; color: var(--text3); white-space: nowrap; margin-top: 4px; }
 
-    .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .tool-card { background: var(--bg3); border: 1px solid var(--border); padding: 1rem; display: flex; gap: 12px; align-items: flex-start; cursor: pointer; transition: border-color .15s; }
-    .tool-card:hover { border-color: var(--cyan); }
-    .tool-num { font-family: var(--mono); font-size: 11px; color: var(--text3); min-width: 20px; padding-top: 2px; }
-    .tool-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-    .tool-desc { font-size: 11px; color: var(--text3); line-height: 1.6; font-weight: 300; }
-    .tool-link { font-family: var(--mono); font-size: 9px; color: var(--cyan); margin-top: 4px; display: block; letter-spacing: .06em; }
-
     .footer { padding: 1.8rem 0 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem; }
     .footer-l { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .04em; }
     .footer-r { display: flex; gap: 1.2rem; }
@@ -154,10 +149,6 @@
     @media (max-width: 600px) {
       .header { flex-direction: column; align-items: flex-start; }
       .hero-title { font-size: 26px; }
-      .cat-grid { grid-template-columns: 1fr; }
-      .tools-grid { grid-template-columns: 1fr; }
-      .feat-title { padding-right: 0; }
-      .feat-card::before { position: static; display: inline-block; margin-bottom: .75rem; }
     }
   </style>
 </head>
@@ -175,22 +166,20 @@
         <div class="brand-sub">INTERNATIONAL · CERTIFICATION</div>
       </div>
     </div>
-    <nav>
+    <nav aria-label="主導航">
       <a href="index.html" class="on">HOME</a>
-      <a href="#">CERTS</a>
-      <a href="#">TOOLS</a>
       <a href="#">ABOUT</a>
     </nav>
   </header>
 
-  <section class="hero">
+  <section class="hero" aria-label="站點介紹">
     <div class="hero-label">
       <div class="hero-label-line"></div>
-      <div class="hero-label-text">GLOBAL IT CERTIFICATION HUB</div>
+      <div class="hero-label-text">IT CERTIFICATION TUTORIALS</div>
     </div>
-    <h1 class="hero-title">通往国际认证<br>的 <em>最短路径</em></h1>
-    <p class="hero-desc">备考经验、考题分析、学习路线图。覆盖 AWS、Cisco、CompTIA、Microsoft 等主流认证体系，帮你少走弯路。</p>
-    <div class="hero-certs">
+    <h1 class="hero-title">國際 IT 認證<br><em>備考教程</em></h1>
+    <p class="hero-desc">專注 AWS、Cisco、CompTIA、Microsoft 等主流認證的備考經驗與考點解析，每篇文章配圖詳解，幫你高效理解、少走彎路。</p>
+    <div class="hero-certs" aria-label="覆蓋認證">
       <div class="cert-pill hot">AWS SAA</div>
       <div class="cert-pill hot">CCNA</div>
       <div class="cert-pill hot">Security+</div>
@@ -200,126 +189,53 @@
       <div class="cert-pill">CCIE</div>
       <div class="cert-pill">CKA</div>
     </div>
-    <div class="hero-bottom">
-      <div class="stats">
-        <div><div class="stat-n">58<span>+</span></div><div class="stat-l">ARTICLES</div></div>
-        <div><div class="stat-n">12</div><div class="stat-l">CERTS COVERED</div></div>
-        <div><div class="stat-n">6</div><div class="stat-l">FREE TOOLS</div></div>
-      </div>
-      <a href="#" class="rss-btn">⬡ RSS FEED</a>
-    </div>
   </section>
 
-  <section class="sec">
-    <div class="sec-hd"><span class="sec-title"><span>//</span>CATEGORIES</span></div>
-    <div class="cat-grid">
-      <a href="#" class="cat-card">
-        <div class="cat-icon-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <div class="cat-name">小软件 &amp; 工具</div>
-        <div class="cat-count">18 ARTICLES</div>
-      </a>
-      <a href="#" class="cat-card">
-        <div class="cat-icon-box"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-        <div class="cat-name">国际 IT 认证考试</div>
-        <div class="cat-count">24 ARTICLES</div>
-      </a>
-      <a href="#" class="cat-card">
-        <div class="cat-icon-box"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-        <div class="cat-name">经验 &amp; 技巧</div>
-        <div class="cat-count">16 ARTICLES</div>
-      </a>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="sec-hd"><span class="sec-title"><span>//</span>FEATURED</span></div>
-    <a href="#" class="feat-card">
-      <div class="feat-title">AWS SAA-C03 备考全攻略：从零到拿证只需 60 天</div>
-      <p class="feat-desc">系统梳理 AWS 解决方案架构师认证的考试范围、高频服务、出题规律，附带个人备考日历和推荐资料清单，适合零基础入门。</p>
-      <div class="feat-foot">
-        <div class="tags">
-          <span class="tag blue">AWS</span>
-          <span class="tag blue">SAA-C03</span>
-          <span class="tag">Cloud</span>
-          <span class="tag">Beginner</span>
-        </div>
-        <div class="read-more">READ FULL →</div>
-      </div>
-    </a>
-  </section>
-
-  <section class="sec">
+  <!-- ★ LATEST POSTS — 由 GitHub Actions 自動生成，請勿手動修改此區塊內部 ★ -->
+  <section class="sec" aria-label="最新文章">
     <div class="sec-hd">
       <span class="sec-title"><span>//</span>LATEST POSTS</span>
-      <a href="#" class="see-all">ALL POSTS →</a>
     </div>
     <div class="posts-list">
       <a href="#" class="post-row">
         <div>
           <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2024-12-20</span></div>
-          <div class="post-title">CCNA 考试改版了什么？2024 版考纲变化详解</div>
-          <div class="post-exc">200-301 最新版本对比旧版新增了哪些考点，哪些内容权重提升，备考策略应该如何调整。</div>
+          <div class="post-title">CCNA 考試改版了什麼？2024 版考綱變化詳解</div>
+          <div class="post-exc">200-301 最新版本對比舊版新增了哪些考點，哪些內容權重提升，備考策略應該如何調整。</div>
         </div>
         <div class="post-min">7 MIN</div>
       </a>
       <a href="https://forest-vein-35a.notion.site/IT-34e19f2e2df78038a6c9f5b59d872a56" target="_blank" class="post-row">
         <div>
           <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2024-12-14</span></div>
-          <div class="post-title">CompTIA Security+ SY0-701 高频考点归纳</div>
-          <div class="post-exc">整理了模拟题中出现频率最高的 30 个知识点，按域分类，附记忆口诀和常见错误选项分析。</div>
+          <div class="post-title">CompTIA Security+ SY0-701 高頻考點歸納</div>
+          <div class="post-exc">整理了模擬題中出現頻率最高的 30 個知識點，按域分類，附記憶口訣和常見錯誤選項分析。</div>
         </div>
         <div class="post-min">9 MIN</div>
       </a>
       <a href="#" class="post-row">
         <div>
           <div class="post-meta"><span class="post-tag tool">TOOL</span><span class="post-date">2024-12-05</span></div>
-          <div class="post-title">macOS 上 5 个被低估的效率神器</div>
-          <div class="post-exc">不是又一篇 Alfred/Raycast 推荐，这次挑的是装机率极低但解决真实痛点的小工具。</div>
+          <div class="post-title">macOS 上 5 個被低估的效率神器</div>
+          <div class="post-exc">不是又一篇 Alfred/Raycast 推薦，這次挑的是裝機率極低但解決真實痛點的小工具。</div>
         </div>
         <div class="post-min">5 MIN</div>
       </a>
       <a href="#" class="post-row">
         <div>
           <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2024-11-28</span></div>
-          <div class="post-title">Microsoft AZ-104 与 AZ-900 的区别和选择建议</div>
-          <div class="post-exc">两个认证的定位、难度、含金量对比，以及不同背景的人应该从哪个开始入手的决策框架。</div>
+          <div class="post-title">Microsoft AZ-104 與 AZ-900 的區別和選擇建議</div>
+          <div class="post-exc">兩個認證的定位、難度、含金量對比，以及不同背景的人應該從哪個開始入手的決策框架。</div>
         </div>
         <div class="post-min">6 MIN</div>
       </a>
     </div>
   </section>
 
-  <section class="sec">
-    <div class="sec-hd">
-      <span class="sec-title"><span>//</span>FREE TOOLS</span>
-      <a href="#" class="see-all">ALL →</a>
-    </div>
-    <div class="tools-grid">
-      <a href="#" class="tool-card">
-        <div class="tool-num">01</div>
-        <div><div class="tool-name">认证路线规划器</div><div class="tool-desc">输入当前技能方向，输出推荐认证路径</div><span class="tool-link">LAUNCH TOOL →</span></div>
-      </a>
-      <a href="#" class="tool-card">
-        <div class="tool-num">02</div>
-        <div><div class="tool-name">考试难度对比</div><div class="tool-desc">横向对比主流认证的难度、费用、有效期</div><span class="tool-link">LAUNCH TOOL →</span></div>
-      </a>
-      <a href="#" class="tool-card">
-        <div class="tool-num">03</div>
-        <div><div class="tool-name">Anki 卡片生成器</div><div class="tool-desc">粘贴考点文本，一键生成复习卡片包</div><span class="tool-link">LAUNCH TOOL →</span></div>
-      </a>
-      <a href="#" class="tool-card">
-        <div class="tool-num">04</div>
-        <div><div class="tool-name">备考倒计时</div><div class="tool-desc">设置考试日期，生成每日学习任务</div><span class="tool-link">LAUNCH TOOL →</span></div>
-      </a>
-    </div>
-  </section>
-
   <footer class="footer">
-    <div class="footer-l">© 2024 CERTPATH · POWERED BY GITHUB PAGES</div>
+    <div class="footer-l">© 2025 CERTPATH · POWERED BY GITHUB PAGES</div>
     <div class="footer-r">
-      <a href="#" class="footer-a">GITHUB</a>
-      <a href="#" class="footer-a">RSS</a>
-      <a href="#" class="footer-a">EMAIL</a>
+      <a href="https://github.com/quantum-darkmatter" class="footer-a">GITHUB</a>
     </div>
   </footer>
 
@@ -334,7 +250,7 @@
 
   function rnd(a, b){ return Math.random()*(b-a)+a; }
 
-  // 北斗七星真实比例坐标 (天枢/天璇/天玑/天权/玉衡/开阳/摇光)
+  // 北斗七星真實比例座標 (天樞/天璇/天璣/天權/玉衡/開陽/搖光)
   const BD = [
     {rx:0.00, ry:0.38, r:2.6},
     {rx:0.13, ry:0.00, r:2.5},
@@ -359,7 +275,8 @@
     for(let i=0;i< 50;i++) stars.push({x:rnd(0,W),y:rnd(0,H),r:rnd(.9,1.9), al:rnd(.55,.92),tw:rnd(.008,.025),ph:rnd(0,Math.PI*2),spd:.13,col:`hsl(${rnd(190,230)},80%,100%)`});
   }
 
-  /* ── 螺旋星系：完全静止，只绘制一次到离屏 canvas ── */
+  /* ── 太陽系：旋臂星點靜態快取，太陽光暈 / 日冕 / 行星軌道實時動態繪製 ── */
+  const GAL = { tilt: 0.28, rot: -0.42, hue: 42, ba: 0.84 };
   let galaxyCanvas = null;
   function buildGalaxyCache(){
     const size = Math.round(W * 0.30);
@@ -369,17 +286,13 @@
     const gc = galaxyCanvas.getContext('2d');
     const cx = size, cy = size;
     const outerR = size * 0.82;
-    const tilt   = 0.28;
-    const rot    = -0.42;
-    const hue    = 42;
-    const ba     = 0.84;
+    const { tilt, rot, hue, ba } = GAL;
 
     gc.save();
     gc.translate(cx, cy);
     gc.rotate(rot);
     gc.scale(1, tilt);
 
-    // 核球
     const core = gc.createRadialGradient(0,0,0,0,0,outerR*0.19);
     core.addColorStop(0,   `hsla(${hue+30},92%,99%,${ba*0.96})`);
     core.addColorStop(0.15,`hsla(${hue+15},80%,88%,${ba*0.72})`);
@@ -388,7 +301,6 @@
     gc.fillStyle = core;
     gc.beginPath(); gc.arc(0,0,outerR*0.19,0,Math.PI*2); gc.fill();
 
-    // 盘面
     const disc = gc.createRadialGradient(0,0,0,0,0,outerR);
     disc.addColorStop(0,   `hsla(${hue},62%,68%,${ba*0.20})`);
     disc.addColorStop(0.38,`hsla(${hue},58%,52%,${ba*0.10})`);
@@ -397,7 +309,6 @@
     gc.fillStyle = disc;
     gc.beginPath(); gc.arc(0,0,outerR,0,Math.PI*2); gc.fill();
 
-    // 尘埃带
     const dw = outerR*2.1, dh = outerR*0.055;
     const dust = gc.createLinearGradient(0,-dh,0,dh);
     dust.addColorStop(0,   'transparent');
@@ -407,8 +318,6 @@
     gc.fillStyle = dust;
     gc.fillRect(-dw/2,-dh,dw,dh*2);
 
-    // 旋臂星点（固定随机种子效果——用固定序列替代 Math.random）
-    // 用简单 LCG 伪随机保证每次重建结果一致
     let seed = 20240101;
     function sr(){ seed=(seed*1664525+1013904223)&0xffffffff; return (seed>>>0)/0xffffffff; }
     function srnd(a,b){ return a+(b-a)*sr(); }
@@ -431,7 +340,6 @@
       }
     }
 
-    // 外晕
     const halo=gc.createRadialGradient(0,0,outerR*0.55,0,0,outerR*1.45);
     halo.addColorStop(0,`hsla(${hue},52%,48%,${ba*0.045})`);
     halo.addColorStop(1,'transparent');
@@ -442,12 +350,92 @@
     gc.restore();
   }
 
+  const PLANETS = [
+    { orbit:0.27, baseAng:0.5, speed:0.00060, size:1.7, color:'#bcd6ff', glow:'77,159,255'  },
+    { orbit:0.42, baseAng:2.7, speed:0.00040, size:1.3, color:'#ffe9a8', glow:'245,200,66', ring:true },
+    { orbit:0.58, baseAng:4.6, speed:0.00026, size:2.0, color:'#9ff5e2', glow:'0,212,170'   },
+    { orbit:0.72, baseAng:1.4, speed:0.00016, size:1.2, color:'#cfc9ff', glow:'127,119,221' },
+  ];
+
   function drawGalaxy(){
     if(!galaxyCanvas) buildGalaxyCache();
     const s = galaxyCanvas.width;
-    const gx = W*0.82 - s/2;
-    const gy = H*0.17 - s/2;
-    ctx.drawImage(galaxyCanvas, gx, gy);
+    const cx = W*0.82, cy = H*0.17;
+    const outerR = (s/2) * 0.82;
+    const spin = frame * 0.00012;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(spin);
+    ctx.drawImage(galaxyCanvas, -s/2, -s/2);
+    ctx.restore();
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(spin);
+    ctx.scale(1, GAL.tilt);
+
+    const pulse = 0.86 + 0.14 * Math.sin(frame * 0.006);
+    const coreR = outerR * 0.17 * pulse;
+    const sunGlow = ctx.createRadialGradient(0,0,0,0,0,coreR*2.2);
+    sunGlow.addColorStop(0,    `hsla(${GAL.hue+30},96%,99%,${0.62*pulse})`);
+    sunGlow.addColorStop(0.35, `hsla(${GAL.hue+15},88%,86%,${0.30*pulse})`);
+    sunGlow.addColorStop(1,    'transparent');
+    ctx.fillStyle = sunGlow;
+    ctx.beginPath(); ctx.arc(0,0,coreR*2.2,0,Math.PI*2); ctx.fill();
+
+    for(let i=0;i<4;i++){
+      const a = spin*1.6 + i*(Math.PI/2);
+      const len = coreR*4.2*pulse;
+      const fg = ctx.createLinearGradient(Math.cos(a)*len, Math.sin(a)*len, -Math.cos(a)*len, -Math.sin(a)*len);
+      fg.addColorStop(0,'transparent');
+      fg.addColorStop(.5,`hsla(${GAL.hue+20},90%,92%,${0.18*pulse})`);
+      fg.addColorStop(1,'transparent');
+      ctx.strokeStyle=fg; ctx.lineWidth=outerR*0.012;
+      ctx.beginPath(); ctx.moveTo(Math.cos(a)*len,Math.sin(a)*len); ctx.lineTo(-Math.cos(a)*len,-Math.sin(a)*len); ctx.stroke();
+    }
+
+    PLANETS.forEach(p=>{
+      const ang = p.baseAng + frame * p.speed;
+      const r = outerR * p.orbit;
+
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
+
+      const px = Math.cos(ang)*r, py = Math.sin(ang)*r;
+
+      for(let t=1;t<=5;t++){
+        const ta = ang - t*0.05;
+        const tx = Math.cos(ta)*r, ty = Math.sin(ta)*r;
+        ctx.globalAlpha = (1 - t/5) * 0.22;
+        ctx.fillStyle = p.color;
+        ctx.beginPath(); ctx.arc(tx,ty,p.size*0.6,0,Math.PI*2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      const pg = ctx.createRadialGradient(px,py,0,px,py,p.size*4);
+      pg.addColorStop(0, `rgba(${p.glow},0.55)`);
+      pg.addColorStop(1, 'transparent');
+      ctx.fillStyle = pg;
+      ctx.beginPath(); ctx.arc(px,py,p.size*4,0,Math.PI*2); ctx.fill();
+
+      ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(px,py,p.size,0,Math.PI*2); ctx.fill();
+
+      if(p.ring){
+        ctx.save();
+        ctx.translate(px,py);
+        ctx.rotate(0.5);
+        ctx.scale(1,0.32);
+        ctx.strokeStyle = 'rgba(245,220,160,0.55)';
+        ctx.lineWidth = 0.6;
+        ctx.beginPath(); ctx.arc(0,0,p.size*2.4,0,Math.PI*2); ctx.stroke();
+        ctx.restore();
+      }
+    });
+
+    ctx.restore();
   }
 
   /* ── 北斗七星 ── */
@@ -473,7 +461,6 @@
       const tw=0.72+0.28*Math.sin(phase);
       const glowR=p.r*(4.5+1.5*Math.sin(phase*1.3));
 
-      // 光晕
       const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,glowR*2.5);
       glow.addColorStop(0,`rgba(180,215,255,${0.22*tw})`);
       glow.addColorStop(.4,`rgba(160,200,255,${0.10*tw})`);
@@ -481,7 +468,6 @@
       ctx.fillStyle=glow;
       ctx.beginPath(); ctx.arc(p.x,p.y,glowR*2.5,0,Math.PI*2); ctx.fill();
 
-      // 四芒星芒
       const spike=p.r*5*tw;
       [0,Math.PI/2].forEach(ang=>{
         const g2=ctx.createLinearGradient(
@@ -499,7 +485,6 @@
       });
       ctx.globalAlpha=1;
 
-      // 星核
       const core=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*tw);
       core.addColorStop(0,'rgba(240,248,255,1)');
       core.addColorStop(.4,`rgba(190,220,255,${0.85*tw})`);
@@ -549,19 +534,15 @@
   function draw(){
     ctx.clearRect(0,0,W,H);
     ctx.fillStyle='#03040a'; ctx.fillRect(0,0,W,H);
-
-    drawGalaxy();       // 静止星系（离屏缓存，直接贴图）
-    drawBigDipper();    // 北斗七星（闪烁）
-    drawStars();        // 背景星场
+    drawGalaxy();
+    drawBigDipper();
+    drawStars();
     spawnShoot();
-    drawShoots();       // 流星
-
-    // 暗角
+    drawShoots();
     const vg=ctx.createRadialGradient(W/2,H*.28,0,W/2,H*.52,H*.88);
     vg.addColorStop(0,'rgba(3,4,10,0)');
     vg.addColorStop(1,'rgba(3,4,10,.5)');
     ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
-
     frame++;
     requestAnimationFrame(draw);
   }
