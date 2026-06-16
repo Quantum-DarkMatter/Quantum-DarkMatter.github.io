@@ -197,21 +197,37 @@
       <span class="sec-title"><span>//</span>LATEST POSTS</span>
     </div>
     <div class="posts-list">
-      <a href="posts/CISA申请流程指南.html" class="post-row">
-        <div>
-          <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2026-06-16</span></div>
-          <div class="post-title">CISA 证书申请流程指南</div>
-          <div class="post-exc">详解 CISA 认证的申请条件、材料准备和提交流程，帮助你顺利完成认证申请。</div>
-        </div>
-        <div class="post-min"></div>
-      </a>
-      <a href="posts/example-post.html" class="post-row">
+      <a href="#" class="post-row">
         <div>
           <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2024-12-20</span></div>
-          <div class="post-title">CCNA 考试改版了什么？2024 版考纲变化详解</div>
-          <div class="post-exc">200-301 最新版本对比旧版新增了哪些考点，哪些内容权重提升，备考策略应该如何调整。</div>
+          <div class="post-title">CCNA 考試改版了什麼？2024 版考綱變化詳解</div>
+          <div class="post-exc">200-301 最新版本對比舊版新增了哪些考點，哪些內容權重提升，備考策略應該如何調整。</div>
         </div>
         <div class="post-min">7 MIN</div>
+      </a>
+      <a href="https://forest-vein-35a.notion.site/IT-34e19f2e2df78038a6c9f5b59d872a56" target="_blank" class="post-row">
+        <div>
+          <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2024-12-14</span></div>
+          <div class="post-title">CompTIA Security+ SY0-701 高頻考點歸納</div>
+          <div class="post-exc">整理了模擬題中出現頻率最高的 30 個知識點，按域分類，附記憶口訣和常見錯誤選項分析。</div>
+        </div>
+        <div class="post-min">9 MIN</div>
+      </a>
+      <a href="#" class="post-row">
+        <div>
+          <div class="post-meta"><span class="post-tag tool">TOOL</span><span class="post-date">2024-12-05</span></div>
+          <div class="post-title">macOS 上 5 個被低估的效率神器</div>
+          <div class="post-exc">不是又一篇 Alfred/Raycast 推薦，這次挑的是裝機率極低但解決真實痛點的小工具。</div>
+        </div>
+        <div class="post-min">5 MIN</div>
+      </a>
+      <a href="#" class="post-row">
+        <div>
+          <div class="post-meta"><span class="post-tag cert">CERT</span><span class="post-date">2024-11-28</span></div>
+          <div class="post-title">Microsoft AZ-104 與 AZ-900 的區別和選擇建議</div>
+          <div class="post-exc">兩個認證的定位、難度、含金量對比，以及不同背景的人應該從哪個開始入手的決策框架。</div>
+        </div>
+        <div class="post-min">6 MIN</div>
       </a>
     </div>
   </section>
@@ -260,7 +276,7 @@
   }
 
   /* ── 太陽系：旋臂星點靜態快取，太陽光暈 / 日冕 / 行星軌道實時動態繪製 ── */
-  const GAL = { tilt: 0.28, rot: -0.42, hue: 42, ba: 0.84 };
+  const GAL = { tilt: 0.28, rot: -0.42, hue: 42, ba: 0.94 };
   let galaxyCanvas = null;
   function buildGalaxyCache(){
     const size = Math.round(W * 0.30);
@@ -278,17 +294,17 @@
     gc.scale(1, tilt);
 
     const core = gc.createRadialGradient(0,0,0,0,0,outerR*0.19);
-    core.addColorStop(0,   `hsla(${hue+30},92%,99%,${ba*0.96})`);
-    core.addColorStop(0.15,`hsla(${hue+15},80%,88%,${ba*0.72})`);
-    core.addColorStop(0.55,`hsla(${hue},68%,62%,${ba*0.28})`);
+    core.addColorStop(0,   `hsla(${hue+30},96%,99%,${ba*0.96})`);
+    core.addColorStop(0.15,`hsla(${hue+15},90%,85%,${ba*0.72})`);
+    core.addColorStop(0.55,`hsla(${hue},82%,58%,${ba*0.32})`);
     core.addColorStop(1,   'transparent');
     gc.fillStyle = core;
     gc.beginPath(); gc.arc(0,0,outerR*0.19,0,Math.PI*2); gc.fill();
 
     const disc = gc.createRadialGradient(0,0,0,0,0,outerR);
-    disc.addColorStop(0,   `hsla(${hue},62%,68%,${ba*0.20})`);
-    disc.addColorStop(0.38,`hsla(${hue},58%,52%,${ba*0.10})`);
-    disc.addColorStop(0.72,`hsla(${hue-12},48%,38%,${ba*0.05})`);
+    disc.addColorStop(0,   `hsla(${hue},80%,66%,${ba*0.28})`);
+    disc.addColorStop(0.38,`hsla(${hue},74%,50%,${ba*0.15})`);
+    disc.addColorStop(0.72,`hsla(${hue-12},62%,38%,${ba*0.08})`);
     disc.addColorStop(1,   'transparent');
     gc.fillStyle = disc;
     gc.beginPath(); gc.arc(0,0,outerR,0,Math.PI*2); gc.fill();
@@ -319,7 +335,7 @@
         const sz=srnd(0.28,0.85)*(1-tt*0.48);
         gc.globalAlpha=ba*br*srnd(0.38,0.98);
         const sh=hue+(1-tt)*26+srnd(-14,14);
-        gc.fillStyle=`hsl(${sh},${48+tt*28}%,${74+br*20}%)`;
+        gc.fillStyle=`hsl(${sh},${64+tt*30}%,${72+br*22}%)`;
         gc.beginPath(); gc.arc(px,py,sz,0,Math.PI*2); gc.fill();
       }
     }
@@ -335,10 +351,10 @@
   }
 
   const PLANETS = [
-    { orbit:0.27, baseAng:0.5, speed:0.00060, size:1.7, color:'#bcd6ff', glow:'77,159,255'  },
-    { orbit:0.42, baseAng:2.7, speed:0.00040, size:1.3, color:'#ffe9a8', glow:'245,200,66', ring:true },
-    { orbit:0.58, baseAng:4.6, speed:0.00026, size:2.0, color:'#9ff5e2', glow:'0,212,170'   },
-    { orbit:0.72, baseAng:1.4, speed:0.00016, size:1.2, color:'#cfc9ff', glow:'127,119,221' },
+    { orbit:0.27, baseAng:0.5, speed:0.00145, size:1.7, color:'#6fb3ff', glow:'77,159,255'  },
+    { orbit:0.42, baseAng:2.7, speed:0.00098, size:1.3, color:'#ffd24d', glow:'245,200,66', ring:true },
+    { orbit:0.58, baseAng:4.6, speed:0.00064, size:2.0, color:'#2de8c4', glow:'0,212,170'   },
+    { orbit:0.72, baseAng:1.4, speed:0.00040, size:1.2, color:'#a48aff', glow:'127,119,221' },
   ];
 
   function drawGalaxy(){
@@ -346,7 +362,7 @@
     const s = galaxyCanvas.width;
     const cx = W*0.82, cy = H*0.17;
     const outerR = (s/2) * 0.82;
-    const spin = frame * 0.00012;
+    const spin = frame * 0.00032;
 
     ctx.save();
     ctx.translate(cx, cy);
@@ -359,11 +375,11 @@
     ctx.rotate(spin);
     ctx.scale(1, GAL.tilt);
 
-    const pulse = 0.86 + 0.14 * Math.sin(frame * 0.006);
+    const pulse = 0.86 + 0.14 * Math.sin(frame * 0.010);
     const coreR = outerR * 0.17 * pulse;
     const sunGlow = ctx.createRadialGradient(0,0,0,0,0,coreR*2.2);
-    sunGlow.addColorStop(0,    `hsla(${GAL.hue+30},96%,99%,${0.62*pulse})`);
-    sunGlow.addColorStop(0.35, `hsla(${GAL.hue+15},88%,86%,${0.30*pulse})`);
+    sunGlow.addColorStop(0,    `hsla(${GAL.hue+30},96%,99%,${0.74*pulse})`);
+    sunGlow.addColorStop(0.35, `hsla(${GAL.hue+15},94%,84%,${0.40*pulse})`);
     sunGlow.addColorStop(1,    'transparent');
     ctx.fillStyle = sunGlow;
     ctx.beginPath(); ctx.arc(0,0,coreR*2.2,0,Math.PI*2); ctx.fill();
@@ -373,7 +389,7 @@
       const len = coreR*4.2*pulse;
       const fg = ctx.createLinearGradient(Math.cos(a)*len, Math.sin(a)*len, -Math.cos(a)*len, -Math.sin(a)*len);
       fg.addColorStop(0,'transparent');
-      fg.addColorStop(.5,`hsla(${GAL.hue+20},90%,92%,${0.18*pulse})`);
+      fg.addColorStop(.5,`hsla(${GAL.hue+20},95%,88%,${0.28*pulse})`);
       fg.addColorStop(1,'transparent');
       ctx.strokeStyle=fg; ctx.lineWidth=outerR*0.012;
       ctx.beginPath(); ctx.moveTo(Math.cos(a)*len,Math.sin(a)*len); ctx.lineTo(-Math.cos(a)*len,-Math.sin(a)*len); ctx.stroke();
@@ -392,14 +408,14 @@
       for(let t=1;t<=5;t++){
         const ta = ang - t*0.05;
         const tx = Math.cos(ta)*r, ty = Math.sin(ta)*r;
-        ctx.globalAlpha = (1 - t/5) * 0.22;
+        ctx.globalAlpha = (1 - t/5) * 0.30;
         ctx.fillStyle = p.color;
         ctx.beginPath(); ctx.arc(tx,ty,p.size*0.6,0,Math.PI*2); ctx.fill();
       }
       ctx.globalAlpha = 1;
 
       const pg = ctx.createRadialGradient(px,py,0,px,py,p.size*4);
-      pg.addColorStop(0, `rgba(${p.glow},0.55)`);
+      pg.addColorStop(0, `rgba(${p.glow},0.68)`);
       pg.addColorStop(1, 'transparent');
       ctx.fillStyle = pg;
       ctx.beginPath(); ctx.arc(px,py,p.size*4,0,Math.PI*2); ctx.fill();
