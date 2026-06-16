@@ -100,10 +100,19 @@ function updateIndex(posts) {
   // 3a. FEATURED 区块
   const featured = posts.find(p => p.featured === 'true') || posts[0];
   if (featured) {
-    html = html.replace(
-      /(<section class="sec">\s*<div class="sec-hd"><span class="sec-title"><span>\/\/<\/span>FEATURED<\/span><\/div>\s*)[\s\S]*?(<\/section>)/,
-      `$1${buildFeaturedHTML(featured)}\n  $2`
-    );
+    // 检查页面中是否已经存在 FEATURED 块
+    if (html.includes('FEATURED</span>')) {
+        // 使用更宽松的正则来匹配已经存在的 FEATURED 块并替换其内容
+        html = html.replace(
+          /(<section class="sec"[^>]*>\s*<div class="sec-hd">\s*<span class="sec-title"><span>\/\/<\/span>FEATURED<\/span>\s*<\/div>\s*)[\s\S]*?(<\/section>)/i,
+          `$1${buildFeaturedHTML(featured)}\n  $2`
+        );
+    } else {
+        // 如果 HTML 模板中去掉了 FEATURED 区块，我们在 LATEST POSTS 前面补上它
+        const featureSection = `  <section class="sec" aria-label="推荐文章">\n    <div class="sec-hd">\n      <span class="sec-title"><span>//</span>FEATURED</span>\n    </div>\n${buildFeaturedHTML(featured)}\n  </section>\n\n  `;
+        // 查找 LATEST POSTS 的开头位置并插入
+        html = html.replace(/(<section class="sec"[^>]*>\s*<div class="sec-hd">\s*<span class="sec-title"><span>\/\/<\/span>LATEST POSTS)/i, featureSection + '$1');
+    }
   }
 
   // 3b. LATEST POSTS 区块（最多显示 5 篇）
