@@ -11,19 +11,6 @@ const SITEMAP_FILE = path.join(__dirname, '..', 'sitemap.xml');
 const BASE_URL    = 'https://quantum-darkmatter.github.io';
 
 // ── 1. 读取所有文章，解析头部注释 ──────────────────────────────────
-// 每篇文章 HTML 最顶部写这样的注释块（第一行必须是 <!DOCTYPE html> 之前）：
-//
-// <!--
-// @title:   文章标题
-// @date:    2025-01-10
-// @tag:     cert          (可选值: cert / tool / tip)
-// @excerpt: 一两句摘要
-// @min:     8
-// @featured: true         (可选，只有一篇)
-// -->
-//
-// 解析器会提取这些字段。
-
 function parseMeta(html) {
   const block = html.match(/^<!--\s*([\s\S]*?)-->/);
   if (!block) return null;
@@ -35,7 +22,7 @@ function parseMeta(html) {
     if (m) meta[m[1].trim()] = m[2].trim();
   }
 
-  if (!meta.title || !meta.date) return null;  // 必填字段
+  if (!meta.title || !meta.date) return null;
   return meta;
 }
 
@@ -45,19 +32,57 @@ function readPosts() {
   return fs.readdirSync(POSTS_DIR)
     .filter(f => f.endsWith('.html'))
     .map(file => {
-      const html = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8');
+      const filePath = path.join(POSTS_DIR, file);
+      const html = fs.readFileSync(filePath, 'utf-8');
       const meta = parseMeta(html);
       if (!meta) {
         console.warn(`⚠️  跳过 ${file}（找不到元信息注释）`);
         return null;
       }
-      return { file, ...meta };
+      return { file, filePath, ...meta };
     })
     .filter(Boolean)
     .sort((a, b) => b.date.localeCompare(a.date));  // 按日期降序
 }
 
-// ── 2. 生成 HTML 片段 ──────────────────────────────────────────────
+// ── 2. 处理 featured 逻辑，自动清理旧标记 ─────────────────────────
+// 规则：
+//   - 所有 featured=true 的文章里，日期最新的那篇作为置顶
+//   - 其余有 featured=true 的文章，自动删除该行（回写文件）
+//   - 如果没有任何 featured，置顶位置留空（不强制取第一篇）
+
+function resolveFeatured(posts) {
+  const featuredPosts = posts.filter(p => p.featured === 'true');
+
+  if (featuredPosts.length === 0) {
+    return { featured: null, normalPosts: posts };
+  }
+
+  // 已按日期降序排列，第一个即最新
+  const [keeper, ...stale] = featuredPosts;
+
+  // 清理旧 featured 标记（回写文件）
+  for (const post of stale) {
+    try {
+      const original = fs.readFileSync(post.filePath, 'utf-8');
+      // 删除含 @featured: 的整行
+      const cleaned = original.replace(/^\s*@featured:.*\r?\n?/m, '');
+      if (cleaned !== original) {
+        fs.writeFileSync(post.filePath, cleaned, 'utf-8');
+        console.log(`🧹 已清除旧置顶标记：${post.file}`);
+      }
+    } catch (e) {
+      console.warn(`⚠️  清理 ${post.file} 时出错：${e.message}`);
+    }
+  }
+
+  // 普通文章列表：排除置顶文章
+  const normalPosts = posts.filter(p => p.file !== keeper.file);
+
+  return { featured: keeper, normalPosts };
+}
+
+// ── 3. 生成 HTML 片段 ──────────────────────────────────────────────
 const TAG_CLASS = { cert: 'cert', tool: 'tool', tip: 'tip' };
 
 function tagLabel(tag) {
@@ -93,40 +118,38 @@ function buildPostRowHTML(post) {
       </a>`;
 }
 
-// ── 3. 更新 index.html ─────────────────────────────────────────────
-function updateIndex(posts) {
+// ── 4. 更新 index.html ─────────────────────────────────────────────
+function updateIndex(featured, normalPosts) {
   let html = fs.readFileSync(INDEX_FILE, 'utf-8');
 
-  // 3a. FEATURED 区块
-  const featured = posts.find(p => p.featured === 'true') || posts[0];
+  // 4a. FEATURED 区块
   if (featured) {
-    // 检查页面中是否已经存在 FEATURED 块
     if (html.includes('FEATURED</span>')) {
-        // 使用更宽松的正则来匹配已经存在的 FEATURED 块并替换其内容
-        html = html.replace(
-          /(<section class="sec"[^>]*>\s*<div class="sec-hd">\s*<span class="sec-title"><span>\/\/<\/span>FEATURED<\/span>\s*<\/div>\s*)[\s\S]*?(<\/section>)/i,
-          `$1${buildFeaturedHTML(featured)}\n  $2`
-        );
+      html = html.replace(
+        /(<section class="sec"[^>]*>\s*<div class="sec-hd">\s*<span class="sec-title"><span>\/\/<\/span>FEATURED<\/span>\s*<\/div>\s*)[\s\S]*?(<\/section>)/i,
+        `$1${buildFeaturedHTML(featured)}\n  $2`
+      );
     } else {
-        // 如果 HTML 模板中去掉了 FEATURED 区块，我们在 LATEST POSTS 前面补上它
-        const featureSection = `  <section class="sec" aria-label="推荐文章">\n    <div class="sec-hd">\n      <span class="sec-title"><span>//</span>FEATURED</span>\n    </div>\n${buildFeaturedHTML(featured)}\n  </section>\n\n  `;
-        // 查找 LATEST POSTS 的开头位置并插入
-        html = html.replace(/(<section class="sec"[^>]*>\s*<div class="sec-hd">\s*<span class="sec-title"><span>\/\/<\/span>LATEST POSTS)/i, featureSection + '$1');
+      const featureSection = `  <section class="sec" aria-label="推荐文章">\n    <div class="sec-hd">\n      <span class="sec-title"><span>//</span>FEATURED</span>\n    </div>\n${buildFeaturedHTML(featured)}\n  </section>\n\n  `;
+      html = html.replace(
+        /(<section class="sec"[^>]*>\s*<div class="sec-hd">\s*<span class="sec-title"><span>\/\/<\/span>LATEST POSTS)/i,
+        featureSection + '$1'
+      );
     }
   }
 
-  // 3b. LATEST POSTS 区块（最多显示 5 篇）
-  const latestRows = posts.slice(0, 5).map(buildPostRowHTML).join('\n');
+  // 4b. LATEST POSTS 区块（最多显示 10 篇，排除置顶文章）
+  const latestRows = normalPosts.slice(0, 10).map(buildPostRowHTML).join('\n');
   html = html.replace(
     /(<div class="posts-list">)\s*[\s\S]*?(<\/div>\s*<\/section>)/,
     `$1\n${latestRows}\n    $2`
   );
 
   fs.writeFileSync(INDEX_FILE, html, 'utf-8');
-  console.log(`✅ index.html 已更新（${posts.length} 篇文章）`);
+  console.log(`✅ index.html 已更新（置顶：${featured ? featured.file : '无'} / 普通：${Math.min(normalPosts.length, 10)} 篇）`);
 }
 
-// ── 4. 更新 sitemap.xml ────────────────────────────────────────────
+// ── 5. 更新 sitemap.xml ────────────────────────────────────────────
 function updateSitemap(posts) {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [
@@ -145,14 +168,16 @@ ${urls}
   console.log(`✅ sitemap.xml 已更新`);
 }
 
-// ── 5. 入口 ───────────────────────────────────────────────────────
-const posts = readPosts();
-console.log(`📄 找到 ${posts.length} 篇文章`);
+// ── 6. 入口 ───────────────────────────────────────────────────────
+const allPosts = readPosts();
+console.log(`📄 找到 ${allPosts.length} 篇文章`);
 
-if (posts.length === 0) {
+if (allPosts.length === 0) {
   console.log('没有找到文章，跳过更新。');
   process.exit(0);
 }
 
-updateIndex(posts);
-updateSitemap(posts);
+const { featured, normalPosts } = resolveFeatured(allPosts);
+
+updateIndex(featured, normalPosts);
+updateSitemap(allPosts);  // sitemap 包含全部文章
