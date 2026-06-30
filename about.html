@@ -223,6 +223,101 @@
       .footer { flex-direction: column; align-items: center; gap: 1rem; padding-top: 1.5rem; }
       .footer-l { text-align: center; line-height: 1.6; }
     }
+  
+    /* 
+      =========================================
+      RESPONSIVE DESIGN (Media Queries)
+      =========================================
+    */
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-title {
+        font-size: 48px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* General layout */
+      .nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+        height: auto;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      /* Hero section */
+      .hero {
+        padding: 100px 20px 40px;
+      }
+      .hero-title {
+        font-size: 36px;
+      }
+      .hero-desc {
+        font-size: 16px;
+      }
+
+      /* Content Grid */
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Pricing Section */
+      .pricing-sec {
+        padding: 40px 20px;
+      }
+      .pricing-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .p-card {
+        width: 100%;
+        max-width: 400px;
+      }
+
+      /* Contact Modal */
+      .cs-cards {
+        grid-template-columns: 1fr !important;
+      }
+      .cs-modal {
+        padding: 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      /* Footer */
+      .footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 30px 20px;
+      }
+      .footer-r {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      /* About Section */
+      .about-content {
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 32px;
+      }
+      .tag-filters {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -264,7 +359,7 @@
             Discord
           </div>
           <div style="font-size: 13px; color: var(--text2); margin: 10px 0; text-align: center;" data-i18n="modal_discord_desc">Join our community of IT learners.</div>
-          <a href="#" style="font-family: var(--mono); font-size: 12px; color: #5865F2; border: 1px solid #5865F2; padding: 4px 12px; border-radius: 4px;" data-i18n="modal_discord_btn">Join Server</a>
+          <a href="https://discord.gg/5wbD9JqJb" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 12px; color: #5865F2; border: 1px solid #5865F2; padding: 4px 12px; border-radius: 4px;" data-i18n="modal_discord_btn">Join Server</a>
         </div>
         <div class="cs-card">
           <div class="cs-card-label">
@@ -272,7 +367,7 @@
             Email
           </div>
           <div style="font-size: 13px; color: var(--text2); margin: 10px 0; text-align: center;" data-i18n="modal_email_desc">For mentorship & business inquiries.</div>
-          <a href="mailto:support@certpath.com" style="font-family: var(--mono); font-size: 12px; color: var(--gold); border: 1px solid var(--gold); padding: 4px 12px; border-radius: 4px;" data-i18n="modal_email_btn">Send Email</a>
+          <a href="mailto:318238@qq.com" style="font-family: var(--mono); font-size: 12px; color: var(--gold); border: 1px solid var(--gold); padding: 4px 12px; border-radius: 4px;" data-i18n="modal_email_btn">Send Email</a>
         </div>
         <div class="cs-card">
           <div class="cs-card-label">
